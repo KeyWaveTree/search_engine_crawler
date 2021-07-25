@@ -1,1 +1,6 @@
-console.log("처음 커밋");
+import { Crawler } from "./libs/crawler";
+
+(async () => {
+  const crawler = new Crawler("https://naver.com/");
+  await crawler.trip();
+})();
