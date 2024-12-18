@@ -1,10 +1,17 @@
+import { Browser } from "./browser";
 import { Crawler } from "./crawler";
 
 export class CrawlerCoordinator {
   private urlQueue: string[];
+  private browser: Browser;
 
   public constructor() {
     this.urlQueue = [];
+    this.browser = new Browser();
+  }
+
+  public getBrowser(): Browser {
+    return this.browser;
   }
 
   // 주소를 전달 받아서 큐에다가 전달
@@ -17,7 +24,6 @@ export class CrawlerCoordinator {
     while (this.urlQueue) {
       //앞에 있는 값을 삭제
       const url = this.urlQueue.shift();
-
       if (!url) {
         continue;
       }

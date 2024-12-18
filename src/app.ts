@@ -1,16 +1,17 @@
 import { CrawlerCoordinator } from "./libs/crawlerCoordinator";
-import { parse } from "node-html-parser";
-
-const text = `<body>
-      <a href="https://naver.com">hello</a>
-      <div>sdfdsfsf<div>
-      <a href="https://kakao.com">world</a>
-      </body>`;
-
-const html = parse(text);
-console.log(html.querySelector("a"));
+import { initialzie } from "koalanlp/Util";
+import database from "./config/database";
 
 (async () => {
+  database.sync({
+    alter: true,
+  });
+
+  await initialzie({
+    packages: { KMR: "2.0.4", KKMA: "2.0.4" },
+    verbose: true,
+  });
+
   const coordinator = new CrawlerCoordinator();
   coordinator.reportUrl("https://naver.com/");
   await coordinator.start();
